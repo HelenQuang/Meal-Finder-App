@@ -15,13 +15,17 @@ body {
 }
 
 .container {
-  margin: auto;
+  margin: 50px auto;
   max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+h1 {
+  font-size: 40px;
 }
 
 .flex {
@@ -79,13 +83,18 @@ input[type="text"] {
   border-radius: 2px;
 }
 
+.meal h3 {
+  color: var(--primary-color);
+  text-align: center;
+}
+
 .meal-info {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,6 +109,9 @@ input[type="text"] {
 .single-meal {
   margin: 30px auto;
   width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .single-meal img {
@@ -112,6 +124,7 @@ input[type="text"] {
 .single-meal-info {
   margin: 20px;
   padding: 10px;
+  width: 300px;
   border: 2px #e09850 dashed;
   border-radius: 5px;
 }
@@ -137,6 +150,16 @@ input[type="text"] {
   font-weight: bold;
   padding: 5px;
   margin: 0 5px 5px 0;
+}
+
+.single-meal a {
+  color: var(--secondary-color);
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.single-meal a:hover {
+  color: #ce8737;
 }
 
 @media (max-width: 800px) {
