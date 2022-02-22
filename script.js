@@ -47,14 +47,21 @@ function searchMeal(e) {
   }
 }
 
-//Get specific meal by ID
-function getMealByID(mealID) {
-  fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`)
-    .then((res) => res.json())
-    .then((data) => {
-      singleMealEl.innerHTML = data.meals
-        .map(
-          (meal) => `
+//Display specific meal
+function displayMeal(meal) {
+  const ingredients = [];
+
+  for (let i = 1; i <= 20; i++) {
+    if (meal[`strIngredient${i}`]) {
+      ingredients.push(
+        `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`
+      );
+    } else {
+      break;
+    }
+  }
+
+  singleMealEl.innerHTML = `
       <div class="single-meal">
         <h1>${meal.strMeal}</h1>
         <img src="${meal.strMealThumb}" alt ="${meal.strMeal}" />
@@ -68,21 +75,33 @@ function getMealByID(mealID) {
           <p>${meal.strInstructions}</p>
 
           <h2>Ingredients</h2>
+          <ul>
+          ${ingredients.map((ing) => `<li>${ing}</li>`).join("")}
+          </ul>
+
           <h2> 
           <a href="${meal.strSource}" alt="Page link"> Direction to source </a>
           </h2>
         </div>
       </div>
-      `
-        )
-        .join("");
-    });
+      `;
 }
 
+//Get specific meal by ID
+function getMealByID(mealID) {
+  fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`)
+    .then((res) => res.json())
+    .then((data) => displayMeal(data.meals[0]));
+}
+
+//Fetch and get random meal
 function getRandomMeal() {
+  mealsEl.innerHTML = "";
+  resultHeading.innerHTML = "";
+
   fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
     .then((res) => res.json())
-    .then((data) => getMealByID(data.meals[0].idMeal));
+    .then((data) => displayMeal(data.meals[0]));
 }
 
 //Add event listener
